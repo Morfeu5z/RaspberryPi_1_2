@@ -1,8 +1,8 @@
 int kp1 = 11, kp2 = 12, kp3 = 10; //number of pin for BUTTON
 String k1 = "A", k2 = "D", k3 = " "; //ASCII symbol
 int d1 = 5, d2 = 6, d3 = 7; //number of pin for LED
-String serialData; //Data from ruspberry
-boolean newData;
+char serialData; //Data from ruspberry
+boolean newData, mess1=0, mess2=0;
 
 void setup() {
   // put your setup code here, to run once:
@@ -14,6 +14,14 @@ void setup() {
   pinMode(d2, OUTPUT);
   pinMode(d3, OUTPUT);
   Serial.println("Start program.");
+  for(int i = d1; i<=d3; i++){
+    digitalWrite(i, HIGH);
+    delay(200);
+  }
+  delay(1000);
+  for(int i = d1; i<=d3; i++){
+    digitalWrite(i, LOW);
+  }
 }
 
 void loop() {
@@ -33,22 +41,18 @@ void GetSerialData(){
 
 //Check how many player have lives.
 void ChangeLED(){
-  int ledNum = serialData[0];
+  int ledNum = int((serialData - '0'));
   boolean ledStat;
-  if(serialData.length()>1){
-    Serial.println(serialData);
-    if(serialData[1]==0){
-      ledStat = 0;
-    }else{
-      ledStat = 1;
+  if(newData == true){
+    Serial.println("Get signal: " + String(ledNum));
+    if(digitalRead(ledNum)==LOW){
+      digitalWrite(ledNum, HIGH);
+      Serial.println("Pin " + String(ledNum) + " is HIGH");
+    }else{  
+      digitalWrite(ledNum, LOW);
+      Serial.println("Pin " + String(ledNum) + " is LOW");
     }
-    while(newData == true){
-      if(ledNum >=2){
-        digitalWrite(ledNum, ledStat);
-      }else if(ledNum == 0){
-        reset();
-      }
-    }
+    newData = false;
   }
 }
 
