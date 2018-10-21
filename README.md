@@ -1,2 +1,2 @@
 # RaspberryPi_1_2
-Zadania 1 i 2 do prof. Halikowskiego
+Zadania do prof. Halikowskiego sem 7
