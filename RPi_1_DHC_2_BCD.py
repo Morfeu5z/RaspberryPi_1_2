@@ -45,18 +45,32 @@ def lesson_1():
 
 # Zadanie 2 - losowanie liczb binarnych
 def lesson_2():
-    value = random.randint(0,99)
-    v_bin = bin(value)
-    v_bin = v_bin[2:]
-    v_len = 8 - len(v_bin)
-    addzero = ''
-    for x in range(v_len):
+    value = random.randint(0,99) # Get random value 0-99
+    #---
+    a_bin = int(value / 10) # Get first number
+    a_bin = bin(a_bin)      # Convert to binary
+    a_bin = a_bin[2:]       # Delate 0b
+    a_len = 4 - len(a_bin)  # Get length a_bin
+    #---
+    b_bin = value % 10      # Get last number
+    b_bin = bin(b_bin)      # Convert to binary
+    b_bin = b_bin[2:]       # Delete 0b
+    b_len = 4 - len(b_bin)  # Get length b_bin
+    #---
+    addzero = '' 
+    for x in range(a_len):
         addzero = addzero + "0"
-    v_bin = addzero + v_bin
-    print('DEC: {}\nBCD: {}'.format(value, v_bin))
-    
+    a_bin = addzero + a_bin     # Add '0' on start
+    #---
+    addzero = ''
+    for x in range(b_len):
+        addzero = addzero + "0"
+    b_bin = addzero + b_bin     # Add '0' on start
+    #---
+    print('DEC: {}\nBCD: {}.{}'.format(value, a_bin, b_bin))
+    #---
     lcd.clear()
-    lcd.message('DEC: ' + str(value) + '\nBCD: ' + str(v_bin))
+    lcd.message('DEC: ' + str(value) + '\nBCD: ' + str(a_bin) + "." + str(b_bin))
     time.sleep(3.0)
     lcd.clear()
 

@@ -1,5 +1,5 @@
 String bin_to_string(){
-  String temp_string   = String(random(0, 255), BIN);
+  String temp_string   = String(random(0, 20), BIN);
   String zero = "";
   for (int counter=0; counter < (8 - temp_string.length()); counter++){
     zero += "0";

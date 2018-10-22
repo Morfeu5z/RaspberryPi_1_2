@@ -18,14 +18,15 @@ void setup() {
 void loop() {
   if(digitalRead(10) == LOW){
     if(btn_on == 0){
-      string = String(random(0, 255), BIN);
+      int s = random(0, 255);
+      string = String(s, BIN);
       l_str = string.length();
       zero = "";
       for(int i = 0; i<8-l_str; i++){
         zero = zero + "0";
       }
       string = zero + string;
-      Serial.println("Liczba - "+ string);
+      Serial.println("Liczba - " + String(s) + " - " + string);
     }
     btn_on = 1;
     digitalWrite(13, HIGH);
