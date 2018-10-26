@@ -1,9 +1,20 @@
 import serial
-import io
+import threading
+from pynput.keyboard import Key, Controller
+
+def readArdu():
+    while True:
+        m = ser.readline()
+        print("\nRead message: {}".format(m))
+    print("Stop loop.")
+
 
 def main():
+    AL = threading.Thread(target=readArdu)
+    AL.start()
     end = ''
-    while end!=0:
+    while end!='exit':
+        print()
         print("1. Send test message.")
         print("2. Send your own message.")
         print("0. Exit")
@@ -17,7 +28,7 @@ def main():
             mess = str(input())
             print(bytes(mess,"UTF-8"))
             ser.write(bytes(mess, "UTF-8"))
-            print("Okey")
+
 
 '''
 ser = serial.Serial("/dev/ttyACM0",9600)

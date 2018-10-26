@@ -1,4 +1,4 @@
-int kp1 = 11, kp2 = 12, kp3 = 10; //number of pin for BUTTON
+int kp1 = 2, kp2 = 3, kp3 = 4; //number of pin for BUTTON
 String k1 = "A", k2 = "D", k3 = " "; //ASCII symbol
 int d1 = 5, d2 = 6, d3 = 7; //number of pin for LED
 char serialData; //Data from ruspberry
@@ -56,15 +56,24 @@ void ChangeLED(){
   }
 }
 
+void BtnPressTest(int x){
+    digitalWrite(x, HIGH);
+    delay(500);
+    digitalWrite(x, LOW);
+  }
+
 // Used to read button and send emulated keboard key.
 void ReadKeyboard(){
   if(digitalRead(kp1)==0){
+    BtnPressTest(d1);
     Serial.println(k1); 
     delay(50);
   }else if(digitalRead(kp2)==0){
+    BtnPressTest(d2);
     Serial.println(k2);
     delay(50);
   }else if(digitalRead(kp3)==0){
+    BtnPressTest(d3);
     Serial.println(k3);
     delay(50);
   }
